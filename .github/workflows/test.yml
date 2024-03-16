@@ -20,6 +20,7 @@ jobs:
         run: npm test
       - name: Generate test coverage
         run: npm run coverage
+      - run: if [ -f coverage/covertura-coverage.xml ] ; then echo "yes" ; else echo "no" ; fi yes 
       - name: Report test coverage to DeepSource
         uses: deepsourcelabs/test-coverage-action@master
         with:
