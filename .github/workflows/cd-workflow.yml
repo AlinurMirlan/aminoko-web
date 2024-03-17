@@ -96,6 +96,5 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Swap slots
-      run: az webapp deployment slot swap -s ${{ env.SLOT_NAME }} -n ${{ env.WEBAPP_NAME }} -g ${{ env.RESOURCE_GROUP }}
-    
+      - name: Swap slots
+        run: az webapp deployment slot swap -s ${{ env.SLOT_NAME }} -n ${{ env.WEBAPP_NAME }} -g ${{ env.RESOURCE_GROUP }}
