@@ -61,26 +61,26 @@ jobs:
       url: ${{ steps.deploy-to-stage.outputs.webapp-url }}
 
     steps:
-    - name: Log into Azure CLI with service principal
-      uses: azure/login@v2.0.0
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    - name: Download artifact from build job
-      uses: actions/download-artifact@v4.1.4
-      with:
-        name: build-artifact
-
-    - name: Unzip artifact for deployment
-      run: unzip build-artifact.zip
-    
-    - name: Deploy to stage environment
-      uses: azure/webapps-deploy@v2
-      id: deploy-to-stage
-      with: 
-        app-name: ${{ env.WEBAPP_NAME }}
-        slot-name:  ${{ env.SLOT_NAME }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      - name: Log into Azure CLI with service principal
+        uses: azure/login@v2.0.0
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+  
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4.1.4
+        with:
+          name: build-artifact
+  
+      - name: Unzip artifact for deployment
+        run: unzip build-artifact.zip
+      
+      - name: Deploy to stage environment
+        uses: azure/webapps-deploy@v2
+        id: deploy-to-stage
+        with: 
+          app-name: ${{ env.WEBAPP_NAME }}
+          slot-name:  ${{ env.SLOT_NAME }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
         
   release-to-prod:
     name: Release to prod
@@ -91,10 +91,10 @@ jobs:
       url: 'https://${{ env.WEBAPP_NAME }}.azurewebsites.net/'
 
     steps:
-    - name: Log into Azure CLI with service principal
-      uses: azure/login@v2.0.0
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Log into Azure CLI with service principal
+        uses: azure/login@v2.0.0
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Swap slots
       run: az webapp deployment slot swap -s ${{ env.SLOT_NAME }} -n ${{ env.WEBAPP_NAME }} -g ${{ env.RESOURCE_GROUP }}
