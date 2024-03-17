@@ -47,9 +47,9 @@ jobs:
         run: zip build-artifact.zip ./* -r
         
       - name: Upload artifact for deployment job
-      - uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
-          name: node-app
+          name: build-artifact
           path: build-artifact.zip
           
   deploy-to-stage:
@@ -69,7 +69,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4.1.4
         with:
-          name: node-app
+          name: build-artifact
   
       - name: Unzip artifact for deployment
         run: unzip build-artifact.zip
