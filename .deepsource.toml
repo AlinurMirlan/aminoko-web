@@ -4,4 +4,8 @@ version = 1
 name = "javascript"
 
 [[analyzers]]
+name = "prettier"
+enabled = true
+
+[[analyzers]]
 name = "test-coverage"
