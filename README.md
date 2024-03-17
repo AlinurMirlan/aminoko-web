@@ -1,3 +1,3 @@
 # aminoko-web
 
-### Autonomous Spaced-Repetition Flashcard Application for English 
+### Autonomous Spaced-Repetition Flashcard Application for English
