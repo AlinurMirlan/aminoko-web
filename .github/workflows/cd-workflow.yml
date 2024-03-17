@@ -1,0 +1,101 @@
+name: Deployment Workflow 
+
+on:
+  push:
+    branches:
+    -  main
+
+env:
+  WEBAPP_NAME: amiko
+  RESOURCE_GROUP: amiko_group
+  SLOT_NAME: staging
+  AZURE_WEBAPP_PACKAGE_PATH: '.'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.2
+        
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.0.2
+        
+      - name: Clean install dependencies
+        run: npm ci
+        
+      - name: Run tests
+        run: npm test
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.2
+        
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.0.2
+        
+      - name: Clean install dependencies
+        run: npm ci
+        
+      - name: Build
+        run: npm run build
+        
+      - name: Zip artifact for deployment
+        run: zip build-artifact.zip ./* -r
+        
+      - name: Upload artifact for deployment job
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build-artifact
+          path: build-artifact.zip
+          
+  deploy-to-stage:
+    name: Deploy to staging environment
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: 'Staging'
+      url: ${{ steps.deploy-to-stage.outputs.webapp-url }}
+
+    steps:
+    - name: Log into Azure CLI with service principal
+      uses: azure/login@v2.0.0
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v4.1.4
+      with:
+        name: build-artifact
+
+    - name: Unzip artifact for deployment
+      run: unzip build-artifact.zip
+    
+    - name: Deploy to stage environment
+      uses: azure/webapps-deploy@v2
+      id: deploy-to-stage
+      with: 
+        app-name: ${{ env.WEBAPP_NAME }}
+        slot-name:  ${{ env.SLOT_NAME }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+        
+  release-to-prod:
+    name: Release to prod
+    needs: deploy-to-stage
+    runs-on: ubuntu-latest
+    environment:
+      name: 'Production'
+      url: 'https://${{ env.WEBAPP_NAME }}.azurewebsites.net/'
+
+    steps:
+    - name: Log into Azure CLI with service principal
+      uses: azure/login@v2.0.0
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Swap slots
+      run: az webapp deployment slot swap -s ${{ env.SLOT_NAME }} -n ${{ env.WEBAPP_NAME }} -g ${{ env.RESOURCE_GROUP }}
+    
