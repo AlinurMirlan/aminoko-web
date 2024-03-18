@@ -86,7 +86,7 @@ jobs:
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
         
   release-to-prod:
-    name: Release to prod
+    name: Release to production
     needs: deploy-to-stage
     runs-on: ubuntu-latest
     environment:
