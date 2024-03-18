@@ -1,4 +1,4 @@
-name: Deployment Workflow 
+name: Deployment workflow 
 
 on:
   push:
@@ -14,6 +14,7 @@ env:
 
 jobs:
   test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,6 +30,7 @@ jobs:
         run: npm test
 
   build:
+    name: Build
     needs: test
     runs-on: ubuntu-latest
     steps:
