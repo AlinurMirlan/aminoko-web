@@ -31,6 +31,13 @@ jobs:
       - name: Run tests
         run: npm test
 
+      - name: Report test coverage to DeepSource
+        uses: deepsourcelabs/test-coverage-action@master
+        with:
+          key: javascript
+          coverage-file: ./coverage/cobertura-coverage.xml
+          dsn: ${{ secrets.DEEPSOURCE_DSN }}
+
   build:
     name: Build
     needs: test
