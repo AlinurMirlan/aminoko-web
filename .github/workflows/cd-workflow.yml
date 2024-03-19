@@ -48,7 +48,9 @@ jobs:
         run: npm run build
         
       - name: Zip artifact for deployment
-        run: zip ${{ env.BUILD_FILE }} dist/ -r
+        run: |
+          cd dist
+          zip ${{ env.BUILD_FILE }} ./ -r
         
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
