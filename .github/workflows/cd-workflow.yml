@@ -81,7 +81,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         id: deploy-to-stage
         with: 
-          app-name: 'amiko(staging)'
+          app-name: ${{ env.WEBAPP_NAME }}
           slot-name:  ${{ env.SLOT_NAME }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
         
