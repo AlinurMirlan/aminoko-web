@@ -64,6 +64,11 @@ jobs:
       url: ${{ steps.deploy-to-stage.outputs.webapp-url }}
 
     steps:
+      - name: Log into Azure CLI with service principal
+        uses: azure/login@v2.0.0
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+  
       - name: Download artifact from build job
         uses: actions/download-artifact@v4.1.4
         with:
@@ -71,21 +76,14 @@ jobs:
   
       - name: Unzip artifact for deployment
         run: unzip build-artifact.zip
-
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZURE_WEBAPP_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_WEBAPP_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       
-      - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
+      - name: Deploy to stage environment
         uses: azure/webapps-deploy@v2
-        with:
+        id: deploy-to-stage
+        with: 
           app-name: 'amiko(staging)'
-          slot-name: 'staging'
-          package: .
+          slot-name:  ${{ env.SLOT_NAME }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
         
   release-to-prod:
     name: Release to production
