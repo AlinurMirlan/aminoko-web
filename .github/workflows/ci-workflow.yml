@@ -1,38 +1,47 @@
-name: Test workflow 
+name: Integration workflow 
+
 on:
   pull_request:
     branches:
     -  main
+    
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.2
+        
       - name: Setup Node.js environment
         uses: actions/setup-node@v4.0.2
+        
       - name: Clean install dependencies
         run: npm ci
+        
       - name: Build
         run: npm run build
+        
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.2
+        
       - name: Setup Node.js environment
         uses: actions/setup-node@v4.0.2
+        
       - name: Clean install dependencies
         run: npm ci
+        
       - name: Run tests
         run: npm test
+        
       - name: Generate test coverage
         run: npm run coverage
+        
       - name: Report test coverage to DeepSource
         uses: deepsourcelabs/test-coverage-action@master
         with:
           key: javascript
           coverage-file: ./coverage/cobertura-coverage.xml
           dsn: ${{ secrets.DEEPSOURCE_DSN }}
-      
-    
