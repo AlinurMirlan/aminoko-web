@@ -54,7 +54,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.BUILD_ARTIFACT_NAME }}
-          path: dist/${{ env.BUILD_FILE }}
+          path: ${{ env.BUILD_FILE }}
           
   deploy-to-stage:
     name: Deploy to staging environment
