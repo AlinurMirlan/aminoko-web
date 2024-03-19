@@ -10,7 +10,7 @@ env:
   WEBAPP_NAME: amiko
   RESOURCE_GROUP: amiko_group
   SLOT_NAME: staging
-  AZURE_WEBAPP_PACKAGE_PATH: '.'
+  AZURE_WEBAPP_PACKAGE_PATH: 'dist/'
 
 jobs:
   test:
@@ -47,7 +47,7 @@ jobs:
         run: npm run build
         
       - name: Zip artifact for deployment
-        run: zip build-artifact.zip dist/ -r
+        run: zip build-artifact.zip ${{ env.AZURE_WEBAPP_PACKAGE_PATH }} -r
         
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
