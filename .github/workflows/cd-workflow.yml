@@ -10,7 +10,8 @@ env:
   WEBAPP_NAME: amiko
   RESOURCE_GROUP: amiko_group
   SLOT_NAME: staging
-  AZURE_WEBAPP_PACKAGE_PATH: 'dist/'
+  BUILD_FILE: build-artifact.zip
+  BUILD_ARTIFACT_NAME: build-artifact
 
 jobs:
   test:
@@ -47,13 +48,13 @@ jobs:
         run: npm run build
         
       - name: Zip artifact for deployment
-        run: zip build-artifact.zip ${{ env.AZURE_WEBAPP_PACKAGE_PATH }} -r
+        run: zip ${{ env.BUILD_FILE }} dist/ -r
         
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: build-artifact
-          path: build-artifact.zip
+          name: ${{ env.BUILD_ARTIFACT_NAME }}
+          path: ${{ env.BUILD_FILE }}
           
   deploy-to-stage:
     name: Deploy to staging environment
@@ -72,10 +73,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4.1.4
         with:
-          name: build-artifact
-  
-      - name: Unzip artifact for deployment
-        run: unzip build-artifact.zip
+          name: ${{ env.BUILD_ARTIFACT_NAME }}
       
       - name: Deploy to stage environment
         uses: azure/webapps-deploy@v3
@@ -83,7 +81,7 @@ jobs:
         with: 
           app-name: ${{ env.WEBAPP_NAME }}
           slot-name:  ${{ env.SLOT_NAME }}
-          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+          package: ${{ env.BUILD_FILE }}
         
   release-to-prod:
     name: Release to production
