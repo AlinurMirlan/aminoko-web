@@ -12,6 +12,7 @@ env:
   SLOT_NAME: staging
   BUILD_FILE: build-artifact.zip
   BUILD_ARTIFACT_NAME: build-artifact
+  BUILD_FILES_FOLDER: dist/
 
 jobs:
   test:
@@ -48,7 +49,7 @@ jobs:
         run: npm run build
         
       - name: Zip artifact for deployment
-        run: zip ${{ env.BUILD_FILE }} dist/ -r
+        run: zip ${{ env.BUILD_FILE }} ${{ env.BUILD_FILES_FOLDER }} -r
         
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -74,6 +75,9 @@ jobs:
         uses: actions/download-artifact@v4.1.4
         with:
           name: ${{ env.BUILD_ARTIFACT_NAME }}
+
+      - name: Unzip artifact for deployment
+        run: unzip build-artifact.zip
       
       - name: Deploy to stage environment
         uses: azure/webapps-deploy@v3
@@ -81,7 +85,7 @@ jobs:
         with: 
           app-name: ${{ env.WEBAPP_NAME }}
           slot-name:  ${{ env.SLOT_NAME }}
-          package: ${{ env.BUILD_FILE }}
+          package: ${{ env.BUILD_FILES_FOLDER }}
         
   release-to-prod:
     name: Release to production
