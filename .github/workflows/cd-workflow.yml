@@ -47,7 +47,7 @@ jobs:
         run: npm run build
         
       - name: Zip artifact for deployment
-        run: zip build-artifact.zip ./* -r
+        run: zip build-artifact.zip dist/ -r
         
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
