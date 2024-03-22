@@ -21,9 +21,9 @@ export function SignInForm() {
   } = useForm<FormData>();
 
   return (
-    <div className="text-on-background p-4">
+    <div className="text-on-background p-4 w-full">
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-4">
+        <div>
           <FormInput
             label="Email Address"
             id="email"
@@ -37,7 +37,7 @@ export function SignInForm() {
             })}
           />
         </div>
-        <div className="mb-4">
+        <div className="mb-1">
           <FormInput
             label="Password"
             id="password"
@@ -52,7 +52,7 @@ export function SignInForm() {
             })}
           />
         </div>
-        <div className="mb-4 flex gap-4 justify-between">
+        <div className="flex gap-4 justify-between">
           <Button type="submit" className="shrink-0" Icon={FingerprintIcon}>
             Sign in
           </Button>
