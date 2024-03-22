@@ -22,6 +22,7 @@ jobs:
         run: npm run build
         
   test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -38,10 +39,3 @@ jobs:
         
       - name: Generate test coverage
         run: npm run coverage
-        
-      - name: Report test coverage to DeepSource
-        uses: deepsourcelabs/test-coverage-action@master
-        with:
-          key: javascript
-          coverage-file: ./coverage/cobertura-coverage.xml
-          dsn: ${{ secrets.DEEPSOURCE_DSN }}

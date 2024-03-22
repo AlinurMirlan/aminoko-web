@@ -1,9 +1,9 @@
-name: Deployment workflow 
+name: Deployment workflow
 
 on:
   push:
     branches:
-    -  main
+      - main
   workflow_dispatch:
 
 env:
@@ -21,25 +21,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.2
-        
+
       - name: Setup Node.js environment
         uses: actions/setup-node@v4.0.2
-        
+
       - name: Clean install dependencies
         run: npm ci
-        
+
       - name: Run tests
         run: npm test
-
-      - name: Generate test coverage
-        run: npm run coverage
-
-      - name: Report test coverage to DeepSource
-        uses: deepsourcelabs/test-coverage-action@master
-        with:
-          key: javascript
-          coverage-file: ./coverage/cobertura-coverage.xml
-          dsn: ${{ secrets.DEEPSOURCE_DSN }}
 
   build:
     name: Build
@@ -48,31 +38,31 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.2
-        
+
       - name: Setup Node.js environment
         uses: actions/setup-node@v4.0.2
-        
+
       - name: Clean install dependencies
         run: npm ci
-        
+
       - name: Build
         run: npm run build
-        
+
       - name: Zip artifact for deployment
         run: zip ${{ env.BUILD_FILE }} ${{ env.BUILD_FILES_FOLDER }} -r
-        
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.BUILD_ARTIFACT_NAME }}
           path: ${{ env.BUILD_FILE }}
-          
+
   deploy-to-stage:
     name: Deploy to staging environment
     needs: build
     runs-on: ubuntu-latest
     environment:
-      name: 'Staging'
+      name: "Staging"
       url: ${{ steps.deploy-to-stage.outputs.webapp-url }}
 
     steps:
@@ -80,7 +70,7 @@ jobs:
         uses: azure/login@v2.0.0
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-  
+
       - name: Download artifact from build job
         uses: actions/download-artifact@v4.1.4
         with:
@@ -88,22 +78,22 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip build-artifact.zip
-      
+
       - name: Deploy to stage environment
         uses: azure/webapps-deploy@v3
         id: deploy-to-stage
-        with: 
+        with:
           app-name: ${{ env.WEBAPP_NAME }}
-          slot-name:  ${{ env.SLOT_NAME }}
+          slot-name: ${{ env.SLOT_NAME }}
           package: ${{ env.BUILD_FILES_FOLDER }}
-        
+
   release-to-prod:
     name: Release to production
     needs: deploy-to-stage
     runs-on: ubuntu-latest
     environment:
-      name: 'Production'
-      url: 'https://${{ env.WEBAPP_NAME }}.azurewebsites.net/'
+      name: "Production"
+      url: "https://${{ env.WEBAPP_NAME }}.azurewebsites.net/"
 
     steps:
       - name: Log into Azure CLI with service principal
