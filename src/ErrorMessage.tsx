@@ -5,5 +5,13 @@ type Props = {
 };
 
 export function ErrorMessage({ error }: Props) {
-  return error && <span className="text-error text-sm">{error.message}</span>;
+  let visibility = "invisible";
+  let errorMessage = "placeholder";
+  if (error?.message) {
+    visibility = "visible";
+    errorMessage = error.message;
+  }
+  return (
+    <span className={`text-error text-sm ${visibility}`}>{errorMessage}</span>
+  );
 }
