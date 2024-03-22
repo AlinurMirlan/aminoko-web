@@ -23,7 +23,7 @@ export function SignUpForm() {
   } = useForm<FormData>();
 
   return (
-    <div className="text-slate-900 p-4">
+    <div className="text-on-background p-4">
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
           <FormInput
