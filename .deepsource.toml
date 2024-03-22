@@ -1,11 +1,4 @@
 version = 1
 
 [[analyzers]]
-name = "javascript"
-
-[analyzers.meta]
-plugins = ["react"]
-module_system = "es-modules"
-
-[[analyzers]]
 name = "test-coverage"
