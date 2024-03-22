@@ -11,7 +11,7 @@ type FormData = {
 };
 
 function onSubmit(formData: FormData) {
-  console.log(formData);
+  
 }
 
 export function SignUpForm() {
