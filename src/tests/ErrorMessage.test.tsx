@@ -13,13 +13,14 @@ describe("ErrorMessage", () => {
     expect(getByText(error.message)).toBeInTheDocument();
   });
 
-  it("does not render anything when error is undefined", () => {
+  it("error message is invisible when error is not provided", () => {
     // Arrange
+    const error = undefined;
 
     // Act
-    const { container } = render(<ErrorMessage error={undefined} />);
+    const { container } = render(<ErrorMessage error={error} />);
 
     // Assert
-    expect(container.firstChild).toBeNull();
+    expect(container.firstChild).toHaveClass("invisible");
   });
 });
