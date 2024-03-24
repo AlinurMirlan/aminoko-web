@@ -2,17 +2,12 @@ import { useForm } from "react-hook-form";
 import { Button } from "../../components/common/Button";
 import { InputForm } from "../../components/common/InputForm";
 import { IconFingerprint } from "../../assets/IconFingerprint";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 type FormData = {
   email: string;
   password: string;
 };
-
-function onSubmit(formData: FormData) {
-  console.log(formData);
-  Navigate({ to: "/home" });
-}
 
 export function FormSignIn() {
   const {
@@ -20,6 +15,13 @@ export function FormSignIn() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
+
+  const navigate = useNavigate();
+
+  function onSubmit(formData: FormData) {
+    console.log(formData);
+    navigate("/home");
+  }
 
   return (
     <div className="text-on-background p-4 w-full">
