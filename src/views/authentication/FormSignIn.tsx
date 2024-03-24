@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "../../components/common/Button";
 import { InputForm } from "../../components/common/InputForm";
 import { IconFingerprint } from "../../assets/IconFingerprint";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 type FormData = {
   email: string;
@@ -11,6 +11,7 @@ type FormData = {
 
 function onSubmit(formData: FormData) {
   console.log(formData);
+  Navigate({ to: "/home" });
 }
 
 export function FormSignIn() {
