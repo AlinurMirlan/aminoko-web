@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
-import { Button } from "./Button";
-import { FormInput } from "./FormInput";
-import { FingerprintIcon } from "./assets/FingerprintIcon";
+import { Button } from "../../components/common/Button";
+import { InputForm } from "../../components/common/InputForm";
+import { IconFingerprint } from "../../assets/IconFingerprint";
 import { Link } from "react-router-dom";
 
 type FormData = {
@@ -13,7 +13,7 @@ function onSubmit(formData: FormData) {
   console.log(formData);
 }
 
-export function SignInForm() {
+export function FormSignIn() {
   const {
     register,
     handleSubmit,
@@ -24,7 +24,7 @@ export function SignInForm() {
     <div className="text-on-background p-4 w-full">
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <FormInput
+          <InputForm
             label="Email Address"
             id="email"
             error={errors.email}
@@ -38,7 +38,7 @@ export function SignInForm() {
           />
         </div>
         <div className="mb-1">
-          <FormInput
+          <InputForm
             label="Password"
             id="password"
             error={errors.password}
@@ -53,7 +53,7 @@ export function SignInForm() {
           />
         </div>
         <div className="flex gap-4 justify-between">
-          <Button type="submit" className="shrink-0" Icon={FingerprintIcon}>
+          <Button type="submit" className="shrink-0" Icon={IconFingerprint}>
             Sign in
           </Button>
           <p className="text-on-background text-sm">

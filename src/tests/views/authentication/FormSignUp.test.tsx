@@ -1,13 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { SignUpForm } from "../SignUpForm";
+import { FormSignUp } from "../../../views/authentication/FormSignUp";
 import { MemoryRouter } from "react-router-dom";
 
 describe("SignUpForm", () => {
   test("renders form inputs and submit button", () => {
     render(
       <MemoryRouter>
-        <SignUpForm />
+        <FormSignUp />
       </MemoryRouter>
     );
 
@@ -29,7 +29,7 @@ describe("SignUpForm", () => {
   test("displays error message for invalid data", async () => {
     render(
       <MemoryRouter>
-        <SignUpForm />
+        <FormSignUp />
       </MemoryRouter>
     );
 

@@ -1,6 +1,6 @@
 import { ComponentPropsWithRef, forwardRef, useRef } from "react";
 import { FieldError } from "react-hook-form";
-import { ErrorMessage } from "./ErrorMessage";
+import { ValidationErrorMessage } from "./ValidationErrorMessage";
 
 type Props = {
   label: string;
@@ -8,7 +8,7 @@ type Props = {
   error?: FieldError | undefined;
 } & ComponentPropsWithRef<"input">;
 
-export const FormInput = forwardRef<HTMLInputElement, Props>(function FormInput(
+export const InputForm = forwardRef<HTMLInputElement, Props>(function FormInput(
   { label, id, error, ...inputProps },
   ref
 ) {
@@ -44,9 +44,9 @@ export const FormInput = forwardRef<HTMLInputElement, Props>(function FormInput(
         focus:border-2 focus:border-primary focus:-m-[1px]
         border-outline rounded-md p-2 w-full"
       />
-      <ErrorMessage error={error} />
+      <ValidationErrorMessage error={error} />
     </>
   );
 });
 
-FormInput.displayName = "FormInput";
+InputForm.displayName = "FormInput";

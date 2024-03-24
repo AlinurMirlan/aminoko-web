@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { LogoIcon } from "./assets/LogoIcon";
+import { IconLogo } from "../../assets/IconLogo";
 
 export function Authentication() {
   return (
@@ -8,7 +8,7 @@ export function Authentication() {
         data-testid="application__logo"
         className="flex flex-col items-center justify-center h-full max-w-sm mx-auto"
       >
-        <LogoIcon className="h-11 mb-3" />
+        <IconLogo className="h-11 mb-3" />
         <Outlet />
       </div>
     </main>

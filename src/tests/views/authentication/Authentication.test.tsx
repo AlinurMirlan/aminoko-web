@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { Authentication } from "../Authentication";
+import { Authentication } from "../../../views/authentication/Authentication";
 
 describe("Authentication", () => {
   it("renders the logo", () => {
