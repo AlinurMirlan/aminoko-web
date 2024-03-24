@@ -1,7 +1,8 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
-import { Authentication } from "./Authentication";
-import { SignInForm } from "./SignInForm";
-import { SignUpForm } from "./SignUpForm";
+import { Authentication } from "./views/authentication/Authentication";
+import { FormSignIn } from "./views/authentication/FormSignIn";
+import { FormSignUp } from "./views/authentication/FormSignUp";
+import { Home } from "./views/home/Home";
 
 export const router = createBrowserRouter([
   {
@@ -12,9 +13,13 @@ export const router = createBrowserRouter([
     path: "auth",
     element: <Authentication />,
     children: [
-      { index: true, element: <SignInForm /> },
-      { path: "signin", element: <SignInForm /> },
-      { path: "signup", element: <SignUpForm /> },
+      { index: true, element: <FormSignIn /> },
+      { path: "signin", element: <FormSignIn /> },
+      { path: "signup", element: <FormSignUp /> },
     ],
+  },
+  {
+    path: "home",
+    element: <Home />,
   },
 ]);

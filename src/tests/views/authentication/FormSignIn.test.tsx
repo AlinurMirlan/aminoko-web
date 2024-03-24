@@ -1,13 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { SignInForm } from "../SignInForm";
+import { FormSignIn } from "../../../views/authentication/FormSignIn";
 import { MemoryRouter } from "react-router-dom";
 
 describe("SignInForm", () => {
   test("renders email and password input fields", () => {
     render(
       <MemoryRouter>
-        <SignInForm />
+        <FormSignIn />
       </MemoryRouter>
     );
 
@@ -21,7 +21,7 @@ describe("SignInForm", () => {
   test("renders a link to the signup page", () => {
     render(
       <MemoryRouter>
-        <SignInForm />
+        <FormSignIn />
       </MemoryRouter>
     );
 
@@ -34,7 +34,7 @@ describe("SignInForm", () => {
   test("shows error messages when the form is submitted with invalid data", async () => {
     render(
       <MemoryRouter>
-        <SignInForm />
+        <FormSignIn />
       </MemoryRouter>
     );
 
@@ -52,7 +52,7 @@ describe("SignInForm", () => {
   it("shows an error message when an invalid email is entered", async () => {
     render(
       <MemoryRouter>
-        <SignInForm />
+        <FormSignIn />
       </MemoryRouter>
     );
 

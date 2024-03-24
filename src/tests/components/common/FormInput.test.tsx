@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { FormInput } from "../FormInput";
+import { InputForm } from "../../../components/common/InputForm";
 import React from "react";
 
 describe("FormInput", () => {
@@ -8,7 +8,7 @@ describe("FormInput", () => {
     const id = "username";
 
     // Render the FormInput component with the provided label and id
-    render(<FormInput label={label} id={id} />);
+    render(<InputForm label={label} id={id} />);
 
     // Get the label element by its associated text
     const labelElement = screen.getByLabelText(label);
@@ -22,7 +22,7 @@ describe("FormInput", () => {
     const id = "username";
 
     // Render the FormInput component with the provided label and id
-    render(<FormInput label={label} id={id} />);
+    render(<InputForm label={label} id={id} />);
 
     // Get the input element by its associated label text
     const inputElement = screen.getByLabelText(label);
@@ -38,7 +38,7 @@ describe("FormInput", () => {
     const error = { type: "required", message: "Username is required" };
 
     // Render the FormInput component with the provided label, id, and error
-    render(<FormInput label={label} id={id} error={error} />);
+    render(<InputForm label={label} id={id} error={error} />);
 
     // Get the error message element by its associated text
     const errorMessage = screen.getByText(error.message);
@@ -55,7 +55,7 @@ describe("FormInput", () => {
     const ref = React.createRef<HTMLInputElement>();
 
     // Render the FormInput component with the provided label, id, and ref
-    render(<FormInput label={label} id={id} ref={ref} />);
+    render(<InputForm label={label} id={id} ref={ref} />);
 
     // Get the input element by its associated label text
     const inputElement = screen.getByLabelText(label);
@@ -64,6 +64,3 @@ describe("FormInput", () => {
     expect(inputElement).toBe(ref.current);
   });
 });
-
-
-

@@ -2,13 +2,14 @@ type Props = {
   className?: string;
 };
 
-export function LogoIcon({ className }: Props) {
+export function IconLogo({ className }: Props) {
   return (
     <svg
       data-v-423bf9ae=""
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 321.37062506535796 60"
       className={`fill-logo ${className}`}
+      height="28px"
     >
       <g
         data-v-423bf9ae=""
