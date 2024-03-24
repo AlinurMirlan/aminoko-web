@@ -5,7 +5,7 @@
 @layer base {
   :root {
     --color-logo: 72 142 255;
-    --color-primary: 0 91 192;
+    --color-primary: 72 142 255;
     --color-secondary: 86 94 113;
     --color-tertiary: 113 85 116;
     --color-error: 186 26 26;
@@ -30,11 +30,11 @@
   @media (prefers-color-scheme: dark) {
     :root {
       --color-logo: 200 198 255;
-      --color-primary: 173 198 255;
+      --color-primary: 200 198 255;
       --color-secondary: 191 198 220;
       --color-tertiary: 222 188 223;
       --color-error: 255 180 171;
-      --color-background: 15 23 42;
+      --color-background: 27 27 31;
       --color-outline: 142 144 153;
       --color-primary-container: 0 68 147;
       --color-secondary-container: 63 71 89;
