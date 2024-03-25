@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
+import { store } from "./data/store";
+import { Provider } from "react-redux";
 
 const container = document.getElementById("root");
 if (container == null) {
@@ -11,7 +13,9 @@ if (container == null) {
 }
 
 ReactDOM.createRoot(container).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <Provider store={store}>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  </Provider>
 );

@@ -1,9 +1,8 @@
+import { useSelector } from "react-redux";
 import { StaticPanelBottom } from "./StaticPanelBottom";
+import { RootState } from "../../data/store";
 
-type Props = {
-  screenIsLg: boolean;
-};
-
-export function NavigationPanelBottom({ screenIsLg }: Props) {
-  return !screenIsLg && <StaticPanelBottom />;
+export function NavigationPanelBottom() {
+  const isScreenLg = useSelector((state: RootState) => state.breakpoint.isLg);
+  return !isScreenLg && <StaticPanelBottom />;
 }

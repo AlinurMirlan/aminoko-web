@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { IconLogo } from "../../assets/IconLogo";
 import { IconBurgerMenu } from "../../assets/IconBurgerMenu";
@@ -6,19 +6,26 @@ import { ButtonFlat } from "../common/ButtonFlat";
 import { IconSettings } from "../../assets/IconSettings";
 import { useDimensions } from "../../services/useDimensions";
 import { Button } from "../common/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../data/store";
+import { toggleSidebar } from "../../data/sidebarSlice";
 
 type Props = {
   children?: React.ReactNode;
 };
 
 export function StaticPanelTop({ children }: Props) {
-  const [isPanelOpen, setIsPanelOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const isSidebarOpen = useSelector(
+    (state: RootState) => state.sidebar.isSidebarOpen
+  );
+  const dispatch = useDispatch();
+
   const dimensions = useDimensions(ref);
   const colorBackground = "bg-background";
 
   const handleTogglePanel = () => {
-    setIsPanelOpen(!isPanelOpen);
+    dispatch(toggleSidebar());
   };
 
   return (
@@ -34,7 +41,7 @@ export function StaticPanelTop({ children }: Props) {
         <ButtonFlat Icon={IconBurgerMenu} onClick={handleTogglePanel} />
       </div>
       <AnimatePresence>
-        {isPanelOpen && (
+        {isSidebarOpen && (
           <motion.aside
             style={{ top: dimensions.height }}
             className={`absolute right-0 h-screen ${colorBackground} z-0`}

@@ -1,29 +1,35 @@
-import { useEffect, useState } from "react";
-import { breakpointLg } from "../../constants/breakpoints";
+import { useEffect } from "react";
 import { NavigationPanelTop } from "../../components/navigation/NavigationPanelTop";
 import { NavigationPanelBottom } from "../../components/navigation/NavigationPanelBottom";
-
-function isScreenLg(width: number) {
-  return width > breakpointLg;
-}
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../data/store";
+import { updateBreakpoints } from "../../data/breakpointSlice";
 
 export function Home() {
-  const [screenIsLg, setScreenIsLg] = useState(isScreenLg(window.innerWidth));
+  const isSidebarOpen = useSelector(
+    (state: RootState) => state.sidebar.isSidebarOpen
+  );
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handleResize = () => {
-      setScreenIsLg(isScreenLg(window.innerWidth));
+      dispatch(updateBreakpoints(window.innerWidth));
     };
 
+    dispatch(updateBreakpoints(window.innerWidth));
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [dispatch]);
 
   return (
-    <div className="bg-background text-on-background min-h-screen overflow-clip">
-      <NavigationPanelTop screenIsLg={screenIsLg} />
+    <div
+      className={`bg-background text-on-background min-h-screen overflow-clip ${
+        isSidebarOpen && "bg-red-600"
+      }`}
+    >
+      <NavigationPanelTop />
       <div className="py-2 px-3">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo quaerat
         magni facilis, repellat rerum aliquid perspiciatis, obcaecati velit
@@ -80,7 +86,7 @@ export function Home() {
         sapiente ex illum. Magni natus cupiditate iste voluptatem, similique
         quam veniam ad ut consequatur nisi sapiente ea in.
       </div>
-      <NavigationPanelBottom screenIsLg={screenIsLg} />
+      <NavigationPanelBottom />
     </div>
   );
 }
