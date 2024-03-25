@@ -29,9 +29,9 @@ export function StaticPanelBottom() {
       {showPanel && (
         <motion.div
           data-testid="static__panel__bottom"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 50 }}
+          initial={{ y: 50 }}
+          animate={{ y: 0 }}
+          exit={{ y: 50 }}
           transition={{ duration: 0.3 }}
           className="fixed bottom-0 left-0 right-0 z-10"
         >
