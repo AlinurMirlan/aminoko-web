@@ -33,7 +33,7 @@ export function StaticPanelBottom() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
           transition={{ duration: 0.3 }}
-          className="fixed bottom-0 left-0 right-0"
+          className="fixed bottom-0 left-0 right-0 z-10"
         >
           <div className="flex justify-stretch bg-background">
             <ButtonFlat Icon={IconHome} className="flex-grow" />

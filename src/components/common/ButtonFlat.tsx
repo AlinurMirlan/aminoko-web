@@ -1,5 +1,19 @@
 import { ComponentPropsWithRef, ComponentType } from "react";
-import { colorVariants } from "../../constants/buttons";
+
+const colorVariants = {
+  primary: {
+    text: "text-primary",
+    fill: "fill-primary",
+  },
+  secondary: {
+    text: "text-secondary",
+    fill: "fill-secondary",
+  },
+  tertiary: {
+    text: "text-tertiary",
+    fill: "fill-tertiary",
+  },
+};
 
 type Props = {
   className?: string;
@@ -10,7 +24,7 @@ type Props = {
 export function ButtonFlat({
   Icon,
   className,
-  colorVariant = "primary",
+  colorVariant = "secondary",
   children,
   ...buttonProps
 }: Props) {
