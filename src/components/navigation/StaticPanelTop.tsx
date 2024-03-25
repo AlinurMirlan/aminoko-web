@@ -14,34 +14,33 @@ export function StaticPanelTop({ children }: Props) {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const dimensions = useDimensions(ref);
+  const colorBackground = "bg-background";
 
   const handleTogglePanel = () => {
     setIsPanelOpen(!isPanelOpen);
   };
 
   return (
-    <>
-      <div
-        ref={ref}
-        className="sticky top-0 bg-secondary-container/50 backdrop-blur-xl flex justify-between items-center"
-      >
-        <div className="flex items-center justify-between">
-          <IconLogo className="px-4 h-5" />
-        </div>
-        <div className="flex">
-          {children}
-          <ButtonFlat
-            colorVariant="secondary"
-            Icon={IconBurgerMenu}
-            onClick={handleTogglePanel}
-          />
-        </div>
+    <div
+      ref={ref}
+      className={`sticky top-0 ${colorBackground} flex justify-between items-center`}
+    >
+      <div className="flex items-center justify-between">
+        <IconLogo className="px-4 h-5" />
+      </div>
+      <div className="flex">
+        {children}
+        <ButtonFlat
+          colorVariant="secondary"
+          Icon={IconBurgerMenu}
+          onClick={handleTogglePanel}
+        />
       </div>
       <AnimatePresence>
         {isPanelOpen && (
           <motion.aside
             style={{ top: dimensions.height }}
-            className="fixed right-0 bg-secondary-container/50 backdrop-blur-xl"
+            className={`fixed right-0 ${colorBackground}`}
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 50 }}
@@ -55,6 +54,6 @@ export function StaticPanelTop({ children }: Props) {
           </motion.aside>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }

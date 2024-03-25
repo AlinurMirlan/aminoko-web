@@ -33,9 +33,9 @@ export function StaticPanelBottom() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
           transition={{ duration: 0.3 }}
-          className="fixed bottom-0 left-0 right-0 backdrop-blur-xl"
+          className="fixed bottom-0 left-0 right-0"
         >
-          <div className="flex justify-stretch bg-secondary-container/30">
+          <div className="flex justify-stretch bg-background">
             <ButtonFlat Icon={IconHome} className="flex-grow" />
             <ButtonFlat Icon={IconRepeat} className="flex-grow" />
             <ButtonFlat

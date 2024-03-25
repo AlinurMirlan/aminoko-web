@@ -1,27 +1,5 @@
 import { ComponentPropsWithRef, ComponentType } from "react";
-
-const colorVariants = {
-  primary: {
-    onHover: "hover:bg-primary-container/60",
-    text: "text-on-primary-container",
-    fill: "fill-on-primary-container",
-  },
-  secondary: {
-    onHover: "hover:bg-secondary-container/60",
-    text: "text-on-secondary-container",
-    fill: "fill-on-secondary-container",
-  },
-  tertiary: {
-    onHover: "hover:bg-tertiary-container/60",
-    text: "text-on-tertiary-container",
-    fill: "fill-on-tertiary-container",
-  },
-  transparent: {
-    onHover: "hover:bg-background/60",
-    text: "text-on-background",
-    fill: "fill-primary",
-  },
-};
+import { colorVariants } from "../../constants/buttons";
 
 type Props = {
   className?: string;
@@ -32,7 +10,7 @@ type Props = {
 export function ButtonFlat({
   Icon,
   className,
-  colorVariant = "secondary",
+  colorVariant = "primary",
   children,
   ...buttonProps
 }: Props) {
@@ -40,7 +18,7 @@ export function ButtonFlat({
     <button
       role="button"
       {...buttonProps}
-      className={`${colorVariants[colorVariant].onHover} ${colorVariants[colorVariant].text} 
+      className={`${colorVariants[colorVariant].text} 
       outline-none border-none font-semibold flex gap-1 items-center justify-center p-4 ${className}`}
     >
       <Icon className={`h-6 ${colorVariants[colorVariant].fill}`} />
