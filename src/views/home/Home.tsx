@@ -1,14 +1,11 @@
 import { useEffect } from "react";
 import { NavigationPanelTop } from "../../components/navigation/NavigationPanelTop";
 import { NavigationPanelBottom } from "../../components/navigation/NavigationPanelBottom";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../data/store";
+import { useDispatch } from "react-redux";
 import { updateBreakpoints } from "../../data/breakpointSlice";
+import { SidebarOpenOverlay } from "../../components/navigation/SidebarOpenOverlay";
 
 export function Home() {
-  const isSidebarOpen = useSelector(
-    (state: RootState) => state.sidebar.isSidebarOpen
-  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,12 +22,11 @@ export function Home() {
 
   return (
     <div
-      className={`bg-background text-on-background min-h-screen overflow-clip ${
-        isSidebarOpen && "bg-red-600"
-      }`}
+      className={`bg-background text-on-background min-h-screen overflow-clip z-0`}
     >
+      <SidebarOpenOverlay />
       <NavigationPanelTop />
-      <div className="py-2 px-3">
+      <div className="py-2 px-3 bg-background">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo quaerat
         magni facilis, repellat rerum aliquid perspiciatis, obcaecati velit
         cumque pariatur impedit esse neque corporis reprehenderit nobis deserunt

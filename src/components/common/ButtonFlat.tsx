@@ -33,7 +33,7 @@ export function ButtonFlat({
       role="button"
       {...buttonProps}
       className={`${colorVariants[colorVariant].text} 
-      outline-none border-none font-semibold flex gap-1 items-center justify-center p-4 ${className}`}
+      outline-none border-none font-semibold flex gap-3 items-center justify-center p-4 ${className}`}
     >
       <Icon className={`h-6 ${colorVariants[colorVariant].fill}`} />
       {children}
