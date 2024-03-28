@@ -1,13 +1,15 @@
+// Tests for the SidebarOpenOverlay component
+
 import { render } from "@testing-library/react";
-import { StaticPanelTop } from "../../../components/navigation/StaticPanelTop";
+import { SidebarOpenOverlay } from "../../../components/navigation/SidebarOpenOverlay";
 import { Provider } from "react-redux";
 import { store } from "../../../data/store";
 
-describe("StaticPanelTop component", () => {
-  test("renders without errors", () => {
+describe("SidebarOpenOverlay", () => {
+  it("renders the SidebarOpenOverlay component", () => {
     render(
       <Provider store={store}>
-        <StaticPanelTop />
+        <SidebarOpenOverlay />
       </Provider>
     );
     // Assert that the component renders without throwing any errors
