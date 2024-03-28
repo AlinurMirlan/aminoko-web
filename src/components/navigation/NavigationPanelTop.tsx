@@ -1,4 +1,4 @@
-import { ButtonFlat } from "../common/ButtonFlat";
+import { ButtonNavigation } from "./ButtonNavigation";
 import { StaticPanelTop } from "./StaticPanelTop";
 import { IconBrowse } from "../../assets/IconBrowse";
 import { IconExpand } from "../../assets/IconExpand";
@@ -12,12 +12,18 @@ export function NavigationPanelTop() {
 
   return isScreenLg ? (
     <StaticPanelTop>
-      <ButtonFlat Icon={IconHome}>Home</ButtonFlat>
-      <ButtonFlat Icon={IconRepeat}>Repeat</ButtonFlat>
-      <ButtonFlat colorVariant="tertiary" Icon={IconExpand}>
+      <ButtonNavigation to="home" Icon={IconHome}>
+        Home
+      </ButtonNavigation>
+      <ButtonNavigation to="repeat" Icon={IconRepeat}>
+        Repeat
+      </ButtonNavigation>
+      <ButtonNavigation to="expand" colorVariant="tertiary" Icon={IconExpand}>
         Expand
-      </ButtonFlat>
-      <ButtonFlat Icon={IconBrowse}>Browse</ButtonFlat>
+      </ButtonNavigation>
+      <ButtonNavigation to="browse" Icon={IconBrowse}>
+        Browse
+      </ButtonNavigation>
     </StaticPanelTop>
   ) : (
     <StaticPanelTop />

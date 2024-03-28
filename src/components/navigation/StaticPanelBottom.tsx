@@ -1,4 +1,4 @@
-import { ButtonFlat } from "../common/ButtonFlat";
+import { ButtonNavigation } from "./ButtonNavigation";
 import { IconBrowse } from "../../assets/IconBrowse";
 import { IconExpand } from "../../assets/IconExpand";
 import { IconHome } from "../../assets/IconHome";
@@ -24,6 +24,7 @@ export function StaticPanelBottom() {
     };
   }, []);
 
+  const navButtonClass = "flex-grow";
   return (
     <AnimatePresence>
       {showPanel && (
@@ -36,14 +37,27 @@ export function StaticPanelBottom() {
           className="fixed bottom-0 left-0 right-0"
         >
           <div className="flex justify-stretch bg-background">
-            <ButtonFlat Icon={IconHome} className="flex-grow" />
-            <ButtonFlat Icon={IconRepeat} className="flex-grow" />
-            <ButtonFlat
+            <ButtonNavigation
+              to="home"
+              Icon={IconHome}
+              className={navButtonClass}
+            />
+            <ButtonNavigation
+              to="repeat"
+              Icon={IconRepeat}
+              className={navButtonClass}
+            />
+            <ButtonNavigation
               colorVariant="tertiary"
               Icon={IconExpand}
-              className="flex-grow"
+              to="expand"
+              className={navButtonClass}
             />
-            <ButtonFlat Icon={IconBrowse} className="flex-grow" />
+            <ButtonNavigation
+              to="browse"
+              Icon={IconBrowse}
+              className={navButtonClass}
+            />
           </div>
         </motion.div>
       )}
