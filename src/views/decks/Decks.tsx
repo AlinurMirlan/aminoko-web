@@ -1,7 +1,7 @@
-export function Home() {
+export function Decks() {
   return (
     <>
-      <h1 className="text-xl mb-2">Home Page</h1>
+      <h1 className="text-xl mb-2">Decks Page</h1>
       <p>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo quaerat
         magni facilis, repellat rerum aliquid perspiciatis, obcaecati velit
