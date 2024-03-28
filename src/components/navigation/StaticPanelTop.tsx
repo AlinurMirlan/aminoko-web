@@ -1,19 +1,18 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { IconLogo } from "../../assets/IconLogo";
 import { IconBurgerMenu } from "../../assets/IconBurgerMenu";
-import { ButtonFlat } from "../common/ButtonFlat";
 import { IconSettings } from "../../assets/IconSettings";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../data/store";
 import { toggleSidebar } from "../../data/sidebarSlice";
+import { StaticPanelTopLeftPanel } from "./StaticPanelTopLeftPanel";
+import { ButtonSidebarNavigation } from "./ButtonSidebarNavigation";
 
 type Props = {
   children?: React.ReactNode;
 };
 
 export function StaticPanelTop({ children }: Props) {
-  const topPanelRef = useRef<HTMLDivElement>(null);
   const isSidebarOpen = useSelector(
     (state: RootState) => state.sidebar.isSidebarOpen
   );
@@ -44,13 +43,12 @@ export function StaticPanelTop({ children }: Props) {
   return (
     <>
       <div
-        ref={topPanelRef}
         className={`sticky top-0 ${colorBackground} flex justify-between items-center`}
       >
-        <div className="flex items-center">
-          <ButtonFlat Icon={IconBurgerMenu} onClick={handleTogglePanel} />
-          <IconLogo className="h-5 mr-4" />
-        </div>
+        <StaticPanelTopLeftPanel
+          Icon={IconBurgerMenu}
+          onClick={handleTogglePanel}
+        />
         <div className="flex">{children}</div>
       </div>
       <AnimatePresence>
@@ -63,15 +61,33 @@ export function StaticPanelTop({ children }: Props) {
             transition={{ type: "tween", duration: 0.3 }}
             className={`fixed left-0 top-0 bottom-0 h-screen  ${colorBackground} z-20`}
           >
-            <div className="flex items-center">
-              <ButtonFlat Icon={IconBurgerMenu} onClick={handleTogglePanel} />
-              <IconLogo className="h-5 mr-4" />
-            </div>
-            <div className="px-4 py-2">
-              <div className="flex">
-                <ButtonFlat Icon={IconSettings} className="p-0">
+            <StaticPanelTopLeftPanel
+              Icon={IconBurgerMenu}
+              onClick={handleTogglePanel}
+            />
+            <div className="">
+              <div className="flex flex-col p-2 items-start gap-1">
+                <ButtonSidebarNavigation
+                  onClick={handleTogglePanel}
+                  Icon={IconSettings}
+                  to="templates"
+                >
+                  Templates
+                </ButtonSidebarNavigation>
+                <ButtonSidebarNavigation
+                  onClick={handleTogglePanel}
+                  Icon={IconSettings}
+                  to="decks"
+                >
+                  Decks
+                </ButtonSidebarNavigation>
+                <ButtonSidebarNavigation
+                  onClick={handleTogglePanel}
+                  Icon={IconSettings}
+                  to="settings"
+                >
                   Settings
-                </ButtonFlat>
+                </ButtonSidebarNavigation>
               </div>
             </div>
           </motion.div>
