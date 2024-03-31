@@ -3,7 +3,6 @@ import { NavigationPanelTop } from "../components/navigation/NavigationPanelTop"
 import { NavigationPanelBottom } from "../components/navigation/NavigationPanelBottom";
 import { useDispatch } from "react-redux";
 import { updateBreakpoints } from "../data/breakpointSlice";
-import { SidebarOpenOverlay } from "../components/navigation/SidebarOpenOverlay";
 import { Outlet } from "react-router-dom";
 
 export function Index() {
@@ -23,11 +22,10 @@ export function Index() {
 
   return (
     <div
-      className={`bg-background text-on-background min-h-screen overflow-clip z-0`}
+      className={`bg-background text-on-background min-h-screen flex flex-col overflow-clip z-0`}
     >
-      <SidebarOpenOverlay />
       <NavigationPanelTop />
-      <main className="py-2 px-3 bg-background">
+      <main className="py-2 px-3 bg-background flex-grow flex flex-col">
         <Outlet />
       </main>
       <NavigationPanelBottom />
