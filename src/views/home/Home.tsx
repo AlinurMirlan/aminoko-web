@@ -1,30 +1,8 @@
-import { useEffect, useState } from "react";
-import { breakpointLg } from "../../constants/breakpoints";
-import { NavigationPanelTop } from "../../components/navigation/NavigationPanelTop";
-import { NavigationPanelBottom } from "../../components/navigation/NavigationPanelBottom";
-
-function isScreenLg(width: number) {
-  return width > breakpointLg;
-}
-
 export function Home() {
-  const [screenIsLg, setScreenIsLg] = useState(isScreenLg(window.innerWidth));
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenIsLg(isScreenLg(window.innerWidth));
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   return (
-    <div className="bg-background text-on-background min-h-screen overflow-clip">
-      <NavigationPanelTop screenIsLg={screenIsLg} />
-      <div className="py-2 px-3">
+    <>
+      <h1 className="text-xl mb-2">Home Page</h1>
+      <p>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo quaerat
         magni facilis, repellat rerum aliquid perspiciatis, obcaecati velit
         cumque pariatur impedit esse neque corporis reprehenderit nobis deserunt
@@ -79,8 +57,7 @@ export function Home() {
         eos dolores blanditiis pariatur nemo placeat fugiat tenetur ea. Odit
         sapiente ex illum. Magni natus cupiditate iste voluptatem, similique
         quam veniam ad ut consequatur nisi sapiente ea in.
-      </div>
-      <NavigationPanelBottom screenIsLg={screenIsLg} />
-    </div>
+      </p>
+    </>
   );
 }

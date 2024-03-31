@@ -1,38 +1,19 @@
 import { ComponentPropsWithRef, ComponentType } from "react";
-
-const colorVariants = {
-  primary: {
-    onHover: "hover:bg-primary-container/60",
-    text: "text-on-primary-container",
-    fill: "fill-on-primary-container",
-  },
-  secondary: {
-    onHover: "hover:bg-secondary-container/60",
-    text: "text-on-secondary-container",
-    fill: "fill-on-secondary-container",
-  },
-  tertiary: {
-    onHover: "hover:bg-tertiary-container/60",
-    text: "text-on-tertiary-container",
-    fill: "fill-on-tertiary-container",
-  },
-  transparent: {
-    onHover: "hover:bg-background/60",
-    text: "text-on-background",
-    fill: "fill-primary",
-  },
-};
+import {
+  buttonFlatColorVariants,
+  defaultButtonColorVariant,
+} from "../../constants/buttons";
 
 type Props = {
   className?: string;
-  colorVariant?: keyof typeof colorVariants;
+  colorVariant?: typeof buttonFlatColorVariants.primary.inactive;
   Icon: ComponentType<{ className: string | undefined }>;
 } & ComponentPropsWithRef<"button">;
 
 export function ButtonFlat({
   Icon,
   className,
-  colorVariant = "secondary",
+  colorVariant = buttonFlatColorVariants[defaultButtonColorVariant].inactive,
   children,
   ...buttonProps
 }: Props) {
@@ -40,10 +21,10 @@ export function ButtonFlat({
     <button
       role="button"
       {...buttonProps}
-      className={`${colorVariants[colorVariant].onHover} ${colorVariants[colorVariant].text} 
-      outline-none border-none font-semibold flex gap-1 items-center justify-center p-4 ${className}`}
+      className={`${colorVariant.text} ${colorVariant.bg} rounded-3xl
+        outline-none font-semibold flex gap-3 items-center justify-center px-3 py-1.5 m-2 my-3 ${className}`}
     >
-      <Icon className={`h-6 ${colorVariants[colorVariant].fill}`} />
+      <Icon className={`h-5 ${colorVariant.fill}`} />
       {children}
     </button>
   );

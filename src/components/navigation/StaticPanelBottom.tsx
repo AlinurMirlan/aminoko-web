@@ -1,13 +1,20 @@
-import { ButtonFlat } from "../common/ButtonFlat";
+import { ButtonNavigation } from "./ButtonNavigation";
 import { IconBrowse } from "../../assets/IconBrowse";
 import { IconExpand } from "../../assets/IconExpand";
 import { IconHome } from "../../assets/IconHome";
 import { IconRepeat } from "../../assets/IconRepeat";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useDimensions } from "../../services/useDimensions";
+import { useDispatch } from "react-redux";
+import { updateBottomPanelDimensions } from "../../data/dimensionsSlice";
 
 export function StaticPanelBottom() {
   const [showPanel, setShowPanel] = useState(true);
+  const bottomPanelRef = useRef<HTMLDivElement>(null);
+  const bottomPanelDimensions = useDimensions(bottomPanelRef);
+  const dispatch = useDispatch();
+  dispatch(updateBottomPanelDimensions(bottomPanelDimensions));
 
   useEffect(() => {
     let prevScrollPos = window.scrollY;
@@ -24,26 +31,41 @@ export function StaticPanelBottom() {
     };
   }, []);
 
+  const navButtonClass = "flex-grow";
   return (
     <AnimatePresence>
       {showPanel && (
         <motion.div
+          ref={bottomPanelRef}
           data-testid="static__panel__bottom"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 50 }}
+          initial={{ y: "100%" }}
+          animate={{ y: 0 }}
+          exit={{ y: "100%" }}
           transition={{ duration: 0.3 }}
-          className="fixed bottom-0 left-0 right-0 backdrop-blur-xl"
+          className="fixed bottom-0 left-0 right-0"
         >
-          <div className="flex justify-stretch bg-secondary-container/30">
-            <ButtonFlat Icon={IconHome} className="flex-grow" />
-            <ButtonFlat Icon={IconRepeat} className="flex-grow" />
-            <ButtonFlat
+          <div className="flex justify-stretch bg-background">
+            <ButtonNavigation
+              to="home"
+              Icon={IconHome}
+              className={navButtonClass}
+            />
+            <ButtonNavigation
+              to="repeat"
+              Icon={IconRepeat}
+              className={navButtonClass}
+            />
+            <ButtonNavigation
               colorVariant="tertiary"
               Icon={IconExpand}
-              className="flex-grow"
+              to="expand"
+              className={navButtonClass}
             />
-            <ButtonFlat Icon={IconBrowse} className="flex-grow" />
+            <ButtonNavigation
+              to="browse"
+              Icon={IconBrowse}
+              className={navButtonClass}
+            />
           </div>
         </motion.div>
       )}

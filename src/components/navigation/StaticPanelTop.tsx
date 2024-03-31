@@ -1,60 +1,58 @@
-import { useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { IconLogo } from "../../assets/IconLogo";
-import { IconBurgerMenu } from "../../assets/IconBurgerMenu";
-import { ButtonFlat } from "../common/ButtonFlat";
+import { useRef } from "react";
+import { useDispatch } from "react-redux";
 import { IconSettings } from "../../assets/IconSettings";
-import { useDimensions } from "../../services/useDimensions";
+import { toggleSidebar } from "../../data/sidebarSlice";
+import { ButtonSidebarNavigation } from "./ButtonSidebarNavigation";
+import { StaticPanelTopLeftPanel } from "./StaticPanelTopLeftPanel";
+import { IconTemplate } from "../../assets/IconTemplate";
+import { IconBox } from "../../assets/IconBox";
+import { SidebarNavigation } from "./SidebarNavigation";
 
 type Props = {
   children?: React.ReactNode;
 };
 
 export function StaticPanelTop({ children }: Props) {
-  const [isPanelOpen, setIsPanelOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const dimensions = useDimensions(ref);
-
+  const topPanelRef = useRef<HTMLDivElement>(null);
+  const dispatch = useDispatch();
   const handleTogglePanel = () => {
-    setIsPanelOpen(!isPanelOpen);
+    dispatch(toggleSidebar());
   };
 
   return (
     <>
       <div
-        ref={ref}
-        className="sticky top-0 bg-secondary-container/50 backdrop-blur-xl flex justify-between items-center"
+        ref={topPanelRef}
+        className={`sticky top-0 bg-background flex justify-between items-center`}
       >
-        <div className="flex items-center justify-between">
-          <IconLogo className="px-4 h-5" />
-        </div>
-        <div className="flex">
-          {children}
-          <ButtonFlat
-            colorVariant="secondary"
-            Icon={IconBurgerMenu}
-            onClick={handleTogglePanel}
-          />
-        </div>
+        <StaticPanelTopLeftPanel
+          onClick={handleTogglePanel}
+        />
+        <div className="flex">{children}</div>
       </div>
-      <AnimatePresence>
-        {isPanelOpen && (
-          <motion.aside
-            style={{ top: dimensions.height }}
-            className="fixed right-0 bg-secondary-container/50 backdrop-blur-xl"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 50 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="flex flex-col">
-              <ButtonFlat Icon={IconSettings} className="px-5">
-                Settings
-              </ButtonFlat>
-            </div>
-          </motion.aside>
-        )}
-      </AnimatePresence>
+      <SidebarNavigation onSidebarToggle={handleTogglePanel}>
+        <ButtonSidebarNavigation
+          onClick={handleTogglePanel}
+          Icon={IconTemplate}
+          to="templates"
+        >
+          Templates
+        </ButtonSidebarNavigation>
+        <ButtonSidebarNavigation
+          onClick={handleTogglePanel}
+          Icon={IconBox}
+          to="decks"
+        >
+          Decks
+        </ButtonSidebarNavigation>
+        <ButtonSidebarNavigation
+          onClick={handleTogglePanel}
+          Icon={IconSettings}
+          to="settings"
+        >
+          Settings
+        </ButtonSidebarNavigation>
+      </SidebarNavigation>
     </>
   );
 }
