@@ -22,7 +22,7 @@ export function Index() {
 
   return (
     <div
-      className={`bg-background text-on-background min-h-screen flex flex-col overflow-clip z-0`}
+      className={`bg-background text-on-background min-h-dvh flex flex-col overflow-clip z-0`}
     >
       <NavigationPanelTop />
       <main className="py-2 px-3 bg-background flex-grow flex flex-col">
