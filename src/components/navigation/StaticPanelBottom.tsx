@@ -4,10 +4,17 @@ import { IconExpand } from "../../assets/IconExpand";
 import { IconHome } from "../../assets/IconHome";
 import { IconRepeat } from "../../assets/IconRepeat";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useDimensions } from "../../services/useDimensions";
+import { useDispatch } from "react-redux";
+import { updateBottomPanelDimensions } from "../../data/dimensionsSlice";
 
 export function StaticPanelBottom() {
   const [showPanel, setShowPanel] = useState(true);
+  const bottomPanelRef = useRef<HTMLDivElement>(null);
+  const bottomPanelDimensions = useDimensions(bottomPanelRef);
+  const dispatch = useDispatch();
+  dispatch(updateBottomPanelDimensions(bottomPanelDimensions));
 
   useEffect(() => {
     let prevScrollPos = window.scrollY;
@@ -29,6 +36,7 @@ export function StaticPanelBottom() {
     <AnimatePresence>
       {showPanel && (
         <motion.div
+          ref={bottomPanelRef}
           data-testid="static__panel__bottom"
           initial={{ y: "100%" }}
           animate={{ y: 0 }}
