@@ -2,12 +2,11 @@
 
 import { render, screen } from "@testing-library/react";
 import { StaticPanelTopLeftPanel } from "../../../components/navigation/StaticPanelTopLeftPanel";
-import { IconBurgerMenu } from "../../../assets/IconBurgerMenu";
 
 describe("StaticPanelTopLeftPanel", () => {
   it("renders the StaticPanelTopLeftPanel component", () => {
     render(
-      <StaticPanelTopLeftPanel Icon={IconBurgerMenu} onClick={() => {}} />
+      <StaticPanelTopLeftPanel onClick={() => {}} />
     );
     expect(screen.getByRole("button")).toBeInTheDocument();
   });

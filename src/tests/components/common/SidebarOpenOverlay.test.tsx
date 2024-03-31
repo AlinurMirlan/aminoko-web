@@ -1,15 +1,13 @@
-// Tests for the SidebarOpenOverlay component
-
 import { render } from "@testing-library/react";
-import { SidebarOpenOverlay } from "../../../components/navigation/SidebarOpenOverlay";
 import { Provider } from "react-redux";
 import { store } from "../../../data/store";
+import { SidebarOpenOverlay } from "../../../components/common/SidebarOpenOverlay";
 
 describe("SidebarOpenOverlay", () => {
   it("renders the SidebarOpenOverlay component", () => {
     render(
       <Provider store={store}>
-        <SidebarOpenOverlay />
+        <SidebarOpenOverlay isSidebarOpen={true} onOverlayClick={() => {}} />
       </Provider>
     );
     // Assert that the component renders without throwing any errors
