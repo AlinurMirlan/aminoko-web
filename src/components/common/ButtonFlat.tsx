@@ -1,16 +1,19 @@
 import { ComponentPropsWithRef, ComponentType } from "react";
-import { navButtonColorVariants } from "../../constants/buttons";
+import {
+  buttonFlatColorVariants,
+  defaultButtonColorVariant,
+} from "../../constants/buttons";
 
 type Props = {
   className?: string;
-  colorVariant?: { text: string; fill: string; bg: string };
+  colorVariant?: typeof buttonFlatColorVariants.primary.inactive;
   Icon: ComponentType<{ className: string | undefined }>;
 } & ComponentPropsWithRef<"button">;
 
 export function ButtonFlat({
   Icon,
   className,
-  colorVariant = navButtonColorVariants.secondary.inactive,
+  colorVariant = buttonFlatColorVariants[defaultButtonColorVariant].inactive,
   children,
   ...buttonProps
 }: Props) {
@@ -19,7 +22,7 @@ export function ButtonFlat({
       role="button"
       {...buttonProps}
       className={`${colorVariant.text} ${colorVariant.bg} rounded-3xl
-        outline-none font-semibold flex gap-3 items-center justify-center px-4 py-2 m-2 ${className}`}
+        outline-none font-semibold flex gap-3 items-center justify-center px-3 py-1.5 m-2 my-3 ${className}`}
     >
       <Icon className={`h-5 ${colorVariant.fill}`} />
       {children}

@@ -1,14 +1,14 @@
-import { ComponentPropsWithRef, ComponentType, useState } from "react";
+import { ComponentPropsWithRef, ComponentType } from "react";
 import { routePaths } from "../../router";
-import { navButtonColorVariants } from "../../constants/buttons";
-import { NavLink } from "react-router-dom";
+import { buttonFlatColorVariants } from "../../constants/buttons";
 import { ButtonFlat } from "../common/ButtonFlat";
+import { NavigationWrapper } from "./NavigationWrapper";
 
 type Props = {
   to: keyof typeof routePaths;
   className?: string;
   navLinkClassName?: string;
-  colorVariant?: keyof typeof navButtonColorVariants;
+  colorVariant?: keyof typeof buttonFlatColorVariants;
   Icon: ComponentType<{ className: string | undefined }>;
 } & ComponentPropsWithRef<"button">;
 
@@ -17,31 +17,21 @@ export function ButtonNavigation({
   Icon,
   className,
   navLinkClassName,
-  colorVariant = "secondary",
+  colorVariant,
   children,
   ...buttonProps
 }: Props) {
-  const [isActive, setIsActive] = useState(false);
   return (
-    <NavLink
-      className={({ isActive }) => {
-        setIsActive(isActive);
-        return `flex justify-center flex-grow ${navLinkClassName}`;
-      }}
-      to={routePaths[to]}
+    <NavigationWrapper
+      {...buttonProps}
+      Button={ButtonFlat}
+      Icon={Icon}
+      to={to}
+      className={className}
+      navLinkClassName={navLinkClassName}
+      colorVariant={colorVariant}
     >
-      <ButtonFlat
-        {...buttonProps}
-        className={className}
-        colorVariant={
-          isActive
-            ? navButtonColorVariants[colorVariant].active
-            : navButtonColorVariants[colorVariant].inactive
-        }
-        Icon={Icon}
-      >
-        {children}
-      </ButtonFlat>
-    </NavLink>
+      {children}
+    </NavigationWrapper>
   );
 }

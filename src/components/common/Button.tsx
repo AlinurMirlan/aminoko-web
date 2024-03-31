@@ -3,13 +3,15 @@ import { colorVariants } from "../../constants/buttons";
 
 type Props = {
   className?: string;
-  colorVariant?: keyof typeof colorVariants;
+  buttonVariant?: keyof typeof colorVariants;
+  colorVariant?: keyof typeof colorVariants.outline;
   Icon?: ComponentType<{ className: string | undefined }>;
 } & ComponentPropsWithRef<"button">;
 
 export function Button({
   Icon,
   className,
+  buttonVariant = "solid",
   colorVariant = "primary",
   children,
   ...buttonProps
@@ -18,11 +20,15 @@ export function Button({
     <button
       role="button"
       {...buttonProps}
-      className={`outline-none border-none rounded-full py-2 px-4 ${colorVariants[colorVariant].background} 
-      ${colorVariants[colorVariant].text} hover:shadow-md transition-shadow duration-300 font-semibold 
-      flex items-center gap-1 ${className}`}
+      className={`outline-none rounded-full py-2 px-4 ${colorVariants[buttonVariant][colorVariant].background} 
+      ${colorVariants[buttonVariant][colorVariant].text} hover:shadow-md transition-shadow duration-300 font-semibold 
+      flex items-center gap-2 ${className}`}
     >
-      {Icon && <Icon className={`h-4 ${colorVariants[colorVariant].fill}`} />}
+      {Icon && (
+        <Icon
+          className={`h-4 ${colorVariants[buttonVariant][colorVariant].fill}`}
+        />
+      )}
       {children}
     </button>
   );
