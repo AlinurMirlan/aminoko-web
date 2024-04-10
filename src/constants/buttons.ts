@@ -1,4 +1,4 @@
-const outlineBackground = "bg-background border border-outline";
+const outlineBackground = "bg-background border border-outline/30";
 
 const colorVariants = {
   solid: {
