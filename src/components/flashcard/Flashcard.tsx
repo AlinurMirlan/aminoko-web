@@ -3,9 +3,9 @@ import { IconTune } from "../../assets/IconTune";
 import { IconUndo } from "../../assets/IconUndo";
 import { ButtonIcon } from "../common/ButtonIcon";
 import { Sidebar } from "../common/Sidebar";
-import { IconEdit } from "../../assets/IconEdit";
-import { IconDelete } from "../../assets/IconDelete";
-import { ButtonFlatSidebar } from "../common/ButtonFlatSidebar";
+import { FlashcardOptionsPalette } from "./FlashcardOptionsPalette";
+import { useSelector } from "react-redux";
+import { RootState } from "../../data/store";
 
 type Props = {
   BottomPanel: ReactNode;
@@ -22,35 +22,39 @@ export function Flashcard({
   const handleTogglePanel = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+  const isScreenLg = useSelector((state: RootState) => state.breakpoint.isLg);
 
   return (
     <>
-      <div className={`flex flex-col gap-2 ${className}`} {...divProps}>
-        <div className="flex gap-2">
-          <ButtonIcon
-            Icon={IconTune}
-            buttonVariant="outline"
-            colorVariant="tertiary"
-            onClick={handleTogglePanel}
-          />
-          <div className="rounded-md flex-grow bg-secondary-container"></div>
+      <div className={`flex flex-col gap-3 ${className}`} {...divProps}>
+        <div className="flex rounded-full items-center border border-outline/30">
+          {!isScreenLg && (
+            <ButtonIcon
+              Icon={IconTune}
+              colorVariant="secondary"
+              buttonVariant="outline"
+              className="border-none"
+              onClick={handleTogglePanel}
+            />
+          )}
+          <div className="flex-grow mx-2">12 0 292</div>
           <ButtonIcon
             Icon={IconUndo}
             buttonVariant="outline"
-            colorVariant="tertiary"
+            className="border-none"
+            colorVariant="secondary"
           />
         </div>
-        <div className="p-2 flex-grow bg-secondary-container text-on-secondary-container rounded-md overflow-auto">
-          {children}
+        <div className="border border-outline/30 flex flex-col p-3 flex-grow rounded-2xl overflow-auto">
+          <div className="flex-grow">{children}</div>
         </div>
-        <div className="flex gap-2">{BottomPanel}</div>
+        <div className="flex gap-1">{BottomPanel}</div>
       </div>
       <Sidebar
         isSidebarOpen={isSidebarOpen}
         onSidebarToggle={handleTogglePanel}
       >
-        <ButtonFlatSidebar Icon={IconEdit}>Edit</ButtonFlatSidebar>
-        <ButtonFlatSidebar Icon={IconDelete}>Delete</ButtonFlatSidebar>
+        <FlashcardOptionsPalette />
       </Sidebar>
     </>
   );
