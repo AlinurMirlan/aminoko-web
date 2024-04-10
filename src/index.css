@@ -15,7 +15,7 @@
     --color-secondary-container: 219 226 249;
     --color-tertiary-container: 251 215 252;
     --color-error-container: 255 218 214;
-    --color-surface-variant: 225 226 236;
+    --color-surface-variant: 240 240 245;
     --color-on-primary: 255 255 255;
     --color-on-secondary: 255 255 255;
     --color-on-tertiary: 255 255 255;
@@ -40,7 +40,7 @@
       --color-secondary-container: 63 71 89;
       --color-tertiary-container: 88 62 91;
       --color-error-container: 147 0 10;
-      --color-surface-variant: 68 71 79;
+      --color-surface-variant: 48 49 55;
       --color-on-primary: 0 46 105;
       --color-on-secondary: 40 48 65;
       --color-on-tertiary: 64 40 67;
