@@ -20,7 +20,7 @@ export function ButtonIcon({
     <Button
       {...buttonProps}
       Icon={Icon}
-      className={`rounded-md [&&]:p-3 ${className}`}
+      className={`rounded-full [&&]:p-3 ${className}`}
       buttonVariant={buttonVariant}
       colorVariant={colorVariant}
     />

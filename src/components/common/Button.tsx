@@ -21,7 +21,7 @@ export function Button({
       role="button"
       {...buttonProps}
       className={`outline-none rounded-full py-2 px-4 ${colorVariants[buttonVariant][colorVariant].background} 
-      ${colorVariants[buttonVariant][colorVariant].text} hover:shadow-md transition-shadow duration-300 font-semibold 
+      ${colorVariants[buttonVariant][colorVariant].text} hover:shadow-md transition-shadow duration-300 font-medium 
       flex items-center gap-2 ${className}`}
     >
       {Icon && (
