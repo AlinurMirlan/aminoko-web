@@ -1,12 +1,12 @@
 import { useRef } from "react";
-import { useDispatch } from "react-redux";
-import { IconSettings } from "../../assets/IconSettings";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleSidebar } from "../../data/sidebarSlice";
-import { ButtonSidebarNavigation } from "./ButtonSidebarNavigation";
 import { StaticPanelTopLeftPanel } from "./StaticPanelTopLeftPanel";
-import { IconTemplate } from "../../assets/IconTemplate";
-import { IconBox } from "../../assets/IconBox";
 import { SidebarNavigation } from "./SidebarNavigation";
+import { useDimensions } from "../../services/useDimensions";
+import { updateTopPanelDimensions } from "../../data/dimensionsSlice";
+import { SidebarPalette } from "./SidebarPalette";
+import { RootState } from "../../data/store";
 
 type Props = {
   children?: React.ReactNode;
@@ -14,45 +14,28 @@ type Props = {
 
 export function StaticPanelTop({ children }: Props) {
   const topPanelRef = useRef<HTMLDivElement>(null);
+  const topPanelDimensions = useDimensions(topPanelRef);
   const dispatch = useDispatch();
+  dispatch(updateTopPanelDimensions(topPanelDimensions));
   const handleTogglePanel = () => {
     dispatch(toggleSidebar());
   };
+  const isScreenLg = useSelector((state: RootState) => state.breakpoint.isLg);
 
   return (
     <>
       <div
         ref={topPanelRef}
-        className={`sticky top-0 bg-background flex justify-between items-center`}
+        className={`sticky top-0 bg-background text-on-background flex justify-between items-center`}
       >
-        <StaticPanelTopLeftPanel
-          onClick={handleTogglePanel}
-        />
+        <StaticPanelTopLeftPanel onClick={handleTogglePanel} />
         <div className="flex">{children}</div>
       </div>
-      <SidebarNavigation onSidebarToggle={handleTogglePanel}>
-        <ButtonSidebarNavigation
-          onClick={handleTogglePanel}
-          Icon={IconTemplate}
-          to="templates"
-        >
-          Templates
-        </ButtonSidebarNavigation>
-        <ButtonSidebarNavigation
-          onClick={handleTogglePanel}
-          Icon={IconBox}
-          to="decks"
-        >
-          Decks
-        </ButtonSidebarNavigation>
-        <ButtonSidebarNavigation
-          onClick={handleTogglePanel}
-          Icon={IconSettings}
-          to="settings"
-        >
-          Settings
-        </ButtonSidebarNavigation>
-      </SidebarNavigation>
+      {!isScreenLg && (
+        <SidebarNavigation onSidebarToggle={handleTogglePanel}>
+          <SidebarPalette handleTogglePanel={handleTogglePanel} />
+        </SidebarNavigation>
+      )}
     </>
   );
 }

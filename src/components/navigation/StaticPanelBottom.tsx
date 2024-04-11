@@ -9,6 +9,8 @@ import { useDimensions } from "../../services/useDimensions";
 import { useDispatch } from "react-redux";
 import { updateBottomPanelDimensions } from "../../data/dimensionsSlice";
 
+const navButtonClass = "px-5";
+
 export function StaticPanelBottom() {
   const [showPanel, setShowPanel] = useState(true);
   const bottomPanelRef = useRef<HTMLDivElement>(null);
@@ -28,10 +30,10 @@ export function StaticPanelBottom() {
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      dispatch(updateBottomPanelDimensions({ width: 0, height: 0 }));
     };
-  }, []);
+  }, [dispatch]);
 
-  const navButtonClass = "flex-grow";
   return (
     <AnimatePresence>
       {showPanel && (
@@ -44,7 +46,7 @@ export function StaticPanelBottom() {
           transition={{ duration: 0.3 }}
           className="fixed bottom-0 left-0 right-0"
         >
-          <div className="flex justify-stretch bg-background">
+          <div className="flex justify-stretch bg-background text-on-background">
             <ButtonNavigation
               to="home"
               Icon={IconHome}

@@ -1,4 +1,3 @@
-/* Make tests from the SidebarNavigation component */
 import { render } from "@testing-library/react";
 import { SidebarNavigation } from "../../../components/navigation/SidebarNavigation";
 import { Provider } from "react-redux";

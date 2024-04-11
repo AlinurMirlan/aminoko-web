@@ -25,18 +25,18 @@ export function FlashcardBack({
       BottomPanel={
         <>
           <Button
-            className="w-full justify-center rounded-md"
+            className="w-full justify-center"
             Icon={IconCross}
-            buttonVariant="outline"
             colorVariant="error"
+            buttonVariant="outline"
             onClick={onClickForget}
           >
             Forget
           </Button>
           <Button
-            className="w-full justify-center rounded-md"
-            Icon={IconTick}
+            className="w-full justify-center"
             buttonVariant="outline"
+            Icon={IconTick}
             onClick={onClickRecall}
           >
             Recall
@@ -45,6 +45,7 @@ export function FlashcardBack({
             Icon={IconFlip}
             buttonVariant="outline"
             colorVariant="tertiary"
+            className=""
             onClick={onClickFlip}
           />
         </>

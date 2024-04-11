@@ -13,9 +13,9 @@ export function FlashcardFront({ children, onClickFlip, ...divProps }: Props) {
       {...divProps}
       BottomPanel={
         <Button
-          className="w-full justify-center rounded-md"
-          Icon={IconFlip}
+          className="w-full justify-center"
           buttonVariant="outline"
+          Icon={IconFlip}
           onClick={onClickFlip}
         >
           Flip
