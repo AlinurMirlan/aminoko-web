@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { IconPhoto } from "../../assets/IconPhoto";
 import { inputClass } from "../../constants/input";
-import { useInputFocusLabelStyle } from "../../services/useInputFocus";
+import { useInputFocusLabelStyle } from "../../services/useInputFocusLabelStyle";
 import { LabeledBlock } from "../common/LabeledBlock";
 
 type Props = {

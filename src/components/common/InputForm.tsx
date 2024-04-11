@@ -2,7 +2,7 @@ import { ComponentPropsWithRef, forwardRef } from "react";
 import { FieldError } from "react-hook-form";
 import { ValidationErrorMessage } from "./ValidationErrorMessage";
 import { Input } from "./Input";
-import { useInputFocusLabelStyle } from "../../services/useInputFocus";
+import { useInputFocusLabelStyle } from "../../services/useInputFocusLabelStyle";
 import { LabeledBlock } from "./LabeledBlock";
 
 type Props = {

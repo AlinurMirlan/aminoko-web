@@ -3,7 +3,7 @@ import { Input } from "./Input";
 import { useDimensions } from "../../services/useDimensions";
 import { IconDropdown } from "../../assets/IconDropdown";
 import { inputClass } from "../../constants/input";
-import { useInputFocusLabelStyle } from "../../services/useInputFocus";
+import { useInputFocusLabelStyle } from "../../services/useInputFocusLabelStyle";
 import { LabeledBlock } from "./LabeledBlock";
 
 type Options = {
