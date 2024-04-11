@@ -2,12 +2,12 @@ import { render, screen } from "@testing-library/react";
 import { InputForm } from "../../../components/common/InputForm";
 import React from "react";
 
-describe("FormInput", () => {
+describe("InputForm", () => {
   it("renders the label correctly", () => {
     const label = "Username";
     const id = "username";
 
-    // Render the FormInput component with the provided label and id
+    // Render the InputForm component with the provided label and id
     render(<InputForm label={label} id={id} />);
 
     // Get the label element by its associated text
@@ -21,7 +21,7 @@ describe("FormInput", () => {
     const label = "Username";
     const id = "username";
 
-    // Render the FormInput component with the provided label and id
+    // Render the InputForm component with the provided label and id
     render(<InputForm label={label} id={id} />);
 
     // Get the input element by its associated label text
@@ -37,7 +37,7 @@ describe("FormInput", () => {
 
     const error = { type: "required", message: "Username is required" };
 
-    // Render the FormInput component with the provided label, id, and error
+    // Render the InputForm component with the provided label, id, and error
     render(<InputForm label={label} id={id} error={error} />);
 
     // Get the error message element by its associated text
@@ -54,7 +54,7 @@ describe("FormInput", () => {
     // Create a ref for the input element
     const ref = React.createRef<HTMLInputElement>();
 
-    // Render the FormInput component with the provided label, id, and ref
+    // Render the InputForm component with the provided label, id, and ref
     render(<InputForm label={label} id={id} ref={ref} />);
 
     // Get the input element by its associated label text
