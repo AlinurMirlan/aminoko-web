@@ -10,6 +10,11 @@ import { Expand } from "./views/expand/Expand";
 import { Settings } from "./views/settings/Settings";
 import { Decks } from "./views/decks/Decks";
 import { Templates } from "./views/templates/Templates";
+import { CreateDeck } from "./views/decks/CreateDeck";
+import { CreateTemplate } from "./views/templates/CreateTemplate";
+import { EditTemplate } from "./views/templates/EditTemplate";
+import { EditDeck } from "./views/decks/EditDeck";
+import { EditFlashcard } from "./views/flashcard/EditFlashcard";
 
 export const routePaths = {
   none: "#",
@@ -21,7 +26,12 @@ export const routePaths = {
   "auth-signin": "/auth/signin",
   "auth-signup": "/auth/signup",
   decks: "/decks",
+  createDeck: "/decks/create",
+  editDeck: "/decks/edit",
   templates: "/templates",
+  createTemplate: "/templates/create",
+  editTemplate: "/templates/edit",
+  editFlashcard: "/flashcards/edit",
 };
 
 export const router = createBrowserRouter([
@@ -35,8 +45,14 @@ export const router = createBrowserRouter([
       { path: "browse", element: <Browse /> },
       { path: "expand", element: <Expand /> },
       { path: "settings", element: <Settings /> },
+
       { path: "decks", element: <Decks /> },
       { path: "templates", element: <Templates /> },
+      { path: "decks/create", element: <CreateDeck /> },
+      { path: "decks/edit/:id", element: <EditDeck /> },
+      { path: "templates/create", element: <CreateTemplate /> },
+      { path: "templates/edit/:id", element: <EditTemplate /> },
+      { path: "flashcards/edit/:id", element: <EditFlashcard /> },
     ],
   },
   {

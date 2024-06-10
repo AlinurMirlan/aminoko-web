@@ -37,7 +37,7 @@ export function Flashcard({
               onClick={handleTogglePanel}
             />
           )}
-          <div className="flex-grow mx-2">12 0 292</div>
+          <div className="flex-grow mx-2">12</div>
           <ButtonIcon
             Icon={IconUndo}
             buttonVariant="outline"

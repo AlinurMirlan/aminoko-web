@@ -37,6 +37,32 @@ export function Expand() {
           },
         ]}
       />
+      <Dropdown
+        title="Template"
+        className={margin}
+        options={[
+          {
+            value: "1",
+            label: "Ane No Tomodachi",
+          },
+          {
+            value: "2",
+            label: "Boku No Hero Academia",
+          },
+          {
+            value: "3",
+            label: "One Piece",
+          },
+          {
+            value: "4",
+            label: "Naruto",
+          },
+          {
+            value: "5",
+            label: "Dragon Ball",
+          },
+        ]}
+      />
       <Button Icon={IconPlus}>Create</Button>
     </form>
   );

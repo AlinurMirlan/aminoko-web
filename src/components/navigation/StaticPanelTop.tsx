@@ -26,7 +26,7 @@ export function StaticPanelTop({ children }: Props) {
     <>
       <div
         ref={topPanelRef}
-        className={`sticky top-0 bg-background text-on-background flex justify-between items-center`}
+        className={`sticky top-0 z-10 bg-background text-on-background flex justify-between items-center`}
       >
         <StaticPanelTopLeftPanel onClick={handleTogglePanel} />
         <div className="flex">{children}</div>

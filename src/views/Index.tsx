@@ -26,21 +26,21 @@ export function Index() {
   );
 
   return (
-    <div
-      className={`mx-auto max-w-screen-lg bg-background text-on-background min-h-dvh flex flex-col overflow-clip z-0`}
-    >
-      <NavigationPanelTop />
-      <div className="flex flex-grow">
-        <SidepanelLeft />
-        <main className="max-w-screen-sm self-stretch px-3 py-2 bg-background flex-grow flex flex-col w-full">
-          <div className="flex flex-col flex-grow">
-            <Outlet />
-            <div style={{ height: bottomPanelDimensions.height }}></div>
-          </div>
-        </main>
-        <SidepanelRight />
+    <div className={`bg-background text-on-background  overflow-clip z-0`}>
+      <div className="max-w-screen-lg mx-auto min-h-dvh flex flex-col">
+        <NavigationPanelTop />
+        <div className="flex flex-grow">
+          <SidepanelLeft />
+          <main className="max-w-screen-sm self-stretch px-3 py-2 bg-background flex-grow flex flex-col w-full">
+            <div className="flex flex-col flex-grow">
+              <Outlet />
+              <div style={{ height: bottomPanelDimensions.height }}></div>
+            </div>
+          </main>
+          <SidepanelRight />
+        </div>
+        <NavigationPanelBottom />
       </div>
-      <NavigationPanelBottom />
     </div>
   );
 }
